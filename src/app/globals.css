@@ -159,3 +159,11 @@
 @utility animate-marquee {
   animation: marquee var(--duration, 40s) linear infinite;
 }
+
+.bg-onlyfans {
+  background-image: url("/hero/logo.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 220px;
+  opacity: 0.05;
+}

@@ -113,5 +113,13 @@ export const productSchema = z.object({
     ),
 });
 
+export const commentSchema = z.object({
+  content: z
+    .string()
+    .trim()
+    .min(1, "Nội dung không được để trống")
+    .max(500, "Bình luận không được vượt quá 500 ký tự"),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;
