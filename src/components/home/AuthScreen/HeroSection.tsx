@@ -1,6 +1,6 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, LogIn } from "lucide-react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -25,13 +25,22 @@ export default function HeroSection() {
               Xem video cưỡi ngựa cao cấp, khám phá mẹo chăm sóc ngựa và truy
               cập nội dung độc quyền từ những người sáng tạo hàng đầu.
             </p>
-            <Button
-              className="mt-10 rounded-full bg-white px-8 text-[#00B0F0] hover:bg-white/90"
-              size="lg"
-            >
-              Tham Gia Ngay
-              <ArrowRight className="size-5" />
-            </Button>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link
+                className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-white px-8 font-medium text-[#00B0F0] text-sm transition-all hover:bg-white/90"
+                href="/signup"
+              >
+                Tham Gia Ngay
+                <ArrowRight className="size-5" />
+              </Link>
+              <Link
+                className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/30 bg-white/10 px-8 font-medium text-sm text-white transition-all hover:bg-white/20"
+                href="/login"
+              >
+                <LogIn className="size-5" />
+                Đăng Nhập
+              </Link>
+            </div>
           </div>
         </div>
 
