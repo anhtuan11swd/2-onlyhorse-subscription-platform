@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import ModeToggle from "@/components/mode-toggle";
 import ThemeProvider from "@/components/providers/theme-provider";
+import "next-cloudinary/dist/cld-video-player.css";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 

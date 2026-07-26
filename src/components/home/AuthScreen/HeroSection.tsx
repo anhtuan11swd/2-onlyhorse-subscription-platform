@@ -16,6 +16,7 @@ export default function HeroSection() {
               height={48}
               priority
               src="/hero/logo.svg"
+              style={{ height: "auto", width: "auto" }}
               width={160}
             />
             <h1 className="text-balance font-bold text-4xl text-white leading-tight md:text-5xl lg:text-6xl">
@@ -51,6 +52,7 @@ export default function HeroSection() {
               aria-hidden
               className="object-cover opacity-40 blur-sm"
               fill
+              loading="eager"
               sizes="50vw"
               src="/hero/horse-bg.png"
             />

@@ -121,14 +121,23 @@
     @apply border-border outline-ring/50;
   }
   body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     @apply bg-background text-foreground;
+  }
+  body::-webkit-scrollbar {
+    display: none;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
   html {
+    scrollbar-width: none;
     @apply font-sans;
+  }
+  html::-webkit-scrollbar {
+    display: none;
   }
 }
 
