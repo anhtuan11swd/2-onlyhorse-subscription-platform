@@ -20,6 +20,28 @@ export default function AuthCallbackPage() {
 
   useEffect(() => {
     if (isSuccess && data?.success) {
+      const redirect = localStorage.getItem("stripe-redirect");
+      if (redirect) {
+        localStorage.removeItem("stripe-redirect");
+        try {
+          const parsed = JSON.parse(redirect);
+          const lookupKey = parsed.billing === "annual" ? "yearly" : "monthly";
+          fetch("/api/auth/me")
+            .then((r) => r.json())
+            .then((me) => {
+              if (me.user) {
+                import("@/actions/stripe/checkout").then((mod) =>
+                  mod.createSubscriptionCheckout(lookupKey).then((res) => {
+                    window.location.assign(res.url);
+                  }),
+                );
+              }
+            });
+        } catch {
+          // ignore invalid redirect data
+        }
+        return;
+      }
       router.replace("/");
     }
   }, [isSuccess, data, router]);
