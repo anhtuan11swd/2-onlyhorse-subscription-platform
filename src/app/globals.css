@@ -131,3 +131,9 @@
     @apply font-sans;
   }
 }
+
+@utility background-noise {
+  background-image: url("/hero/noise.svg");
+  background-repeat: repeat;
+  background-size: 180px;
+}

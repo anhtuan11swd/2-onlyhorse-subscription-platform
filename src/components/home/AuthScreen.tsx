@@ -1,3 +1,5 @@
+import HeroSection from "@/components/home/AuthScreen/HeroSection";
+
 export default function AuthScreen() {
-  return <div>Landing Page</div>;
+  return <HeroSection />;
 }
