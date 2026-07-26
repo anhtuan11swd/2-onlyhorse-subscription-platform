@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
-import ModeToggle from "@/components/mode-toggle";
 import ThemeProvider from "@/components/providers/theme-provider";
 import "next-cloudinary/dist/cld-video-player.css";
 import "./globals.css";
@@ -26,12 +25,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <ThemeProvider>
-          <div className="fixed top-4 right-4 z-50">
-            <ModeToggle />
-          </div>
-          {children}
-        </ThemeProvider>
+        <ThemeProvider>{children}</ThemeProvider>
         <Toaster duration={2000} position="top-center" />
       </body>
     </html>
