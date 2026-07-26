@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
+import ModeToggle from "@/components/mode-toggle";
+import ThemeProvider from "@/components/providers/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -20,9 +22,15 @@ export default function RootLayout({
     <html
       className={cn("h-full", "antialiased", "font-sans", inter.variable)}
       lang="vi"
+      suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        {children}
+        <ThemeProvider>
+          <div className="fixed top-4 right-4 z-50">
+            <ModeToggle />
+          </div>
+          {children}
+        </ThemeProvider>
         <Toaster duration={2000} position="top-center" />
       </body>
     </html>
