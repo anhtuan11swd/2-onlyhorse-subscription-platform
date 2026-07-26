@@ -12,6 +12,7 @@ model User {
   name         String?
   password     String
   image        String?
+  role         String   @default("user")
   customerId   String?  @unique
   isSubscribed Boolean  @default(false)
   createdAt    DateTime @default(now())
@@ -44,10 +45,12 @@ model Post {
   userId      String
   title       String?
   description String?
+  caption     String?
   text        String?
   imageUrl    String?
   videoUrl    String?
   mediaUrl    String?
+  publicId    String?
   mediaType   String?
   isPublic    Boolean  @default(false)
   premium     Boolean  @default(false)

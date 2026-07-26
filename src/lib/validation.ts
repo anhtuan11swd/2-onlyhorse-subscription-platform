@@ -68,5 +68,50 @@ export const signupSchema = z
     path: ["confirmPassword"],
   });
 
+const MAX_IMAGE_SIZE = 4 * 1024 * 1024;
+const MAX_VIDEO_SIZE = 50 * 1024 * 1024;
+
+export function validateFileSize(file: File): string | null {
+  if (file.type.startsWith("video/") && file.size > MAX_VIDEO_SIZE) {
+    return "Video không được vượt quá 50MB";
+  }
+  if (file.size > MAX_IMAGE_SIZE) {
+    return "Ảnh không được vượt quá 4MB";
+  }
+  return null;
+}
+
+export const postSchema = z.object({
+  caption: z
+    .string()
+    .min(1, "Vui lòng nhập nội dung bài viết")
+    .max(500, "Nội dung không được vượt quá 500 ký tự"),
+  fileSize: z
+    .number()
+    .max(MAX_VIDEO_SIZE, "File không được vượt quá 50MB")
+    .optional(),
+  isPublic: z.boolean(),
+  mediaUrl: z.string().min(1, "Vui lòng tải media lên"),
+});
+
+export const productSchema = z.object({
+  fileSize: z
+    .number()
+    .max(MAX_IMAGE_SIZE, "Ảnh không được vượt quá 4MB")
+    .optional(),
+  imageUrl: z.string().min(1, "Vui lòng tải ảnh sản phẩm"),
+  name: z
+    .string()
+    .min(1, "Vui lòng nhập tên sản phẩm")
+    .max(200, "Tên sản phẩm không được vượt quá 200 ký tự"),
+  price: z
+    .string()
+    .min(1, "Vui lòng nhập giá sản phẩm")
+    .refine(
+      (v) => !Number.isNaN(Number(v)) && Number(v) >= 15000,
+      "Giá tối thiểu là 15.000đ",
+    ),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;

@@ -1,8 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "50mb",
+    },
+  },
   reactCompiler: true,
+  serverExternalPackages: ["cloudinary"],
 };
 
 export default nextConfig;
