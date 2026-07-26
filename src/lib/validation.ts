@@ -121,5 +121,10 @@ export const commentSchema = z.object({
     .max(500, "Bình luận không được vượt quá 500 ký tự"),
 });
 
+export const profileSchema = z.object({
+  image: z.string().optional(),
+  name: nameSchema,
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type SignupInput = z.infer<typeof signupSchema>;

@@ -1,6 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
+import { sendReceiptEmail, sendWelcomeEmail } from "@/lib/send-email";
 import { stripe } from "@/lib/stripe";
 
 export async function verifyCheckoutSession(sessionId: string) {
@@ -12,6 +13,11 @@ export async function verifyCheckoutSession(sessionId: string) {
       const orderId = checkout.metadata?.orderId;
 
       if (userId) {
+        const user = await prisma.user.findUnique({
+          select: { email: true, name: true },
+          where: { id: userId },
+        });
+
         await prisma.user.update({
           data: { customerId: checkout.customer as string },
           where: { id: userId },
@@ -22,6 +28,10 @@ export async function verifyCheckoutSession(sessionId: string) {
             data: { isSubscribed: true },
             where: { id: userId },
           });
+
+          if (user?.email) {
+            await sendWelcomeEmail(user.name || "User", "Premium", user.email);
+          }
         }
 
         if (orderId) {
@@ -29,6 +39,20 @@ export async function verifyCheckoutSession(sessionId: string) {
             data: { status: "paid", stripeSessionId: sessionId },
             where: { id: orderId },
           });
+
+          const product = await prisma.product.findUnique({
+            where: { id: checkout.metadata?.productId },
+          });
+
+          if (user?.email && product) {
+            await sendReceiptEmail(
+              user.name || "User",
+              product.name,
+              product.price,
+              orderId,
+              user.email,
+            );
+          }
         }
       }
     }

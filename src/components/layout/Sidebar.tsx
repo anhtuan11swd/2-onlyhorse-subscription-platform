@@ -11,6 +11,7 @@ import {
   Settings,
   Shirt,
   Sun,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -41,6 +42,7 @@ const sidebarLinks = [
     icon: LayoutDashboard,
     label: "Bảng điều khiển",
   },
+  { href: "/update-profile", icon: User, label: "Hồ sơ" },
 ];
 
 function SidebarContent() {
@@ -139,6 +141,22 @@ function SidebarContent() {
                 Thanh toán
               </DropdownMenuItem>
             )}
+            <DropdownMenuItem
+              onClick={async () => {
+                const { createBillingPortalAction } = await import(
+                  "@/actions/stripe/billingPortal"
+                );
+                try {
+                  const { url } = await createBillingPortalAction();
+                  window.location.assign(url);
+                } catch {
+                  window.location.href = "/subscription";
+                }
+              }}
+            >
+              <CreditCard className="mr-2 size-4" />
+              Quản lý gói
+            </DropdownMenuItem>
             <DropdownMenuItem disabled={loggingOut} onClick={handleLogout}>
               <LogOut className="mr-2 size-4" />
               {loggingOut ? "Đang đăng xuất..." : "Đăng xuất"}
