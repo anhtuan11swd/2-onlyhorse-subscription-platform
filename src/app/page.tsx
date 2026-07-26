@@ -1,3 +1,8 @@
+import AuthScreen from "@/components/home/AuthScreen";
+import HomeScreen from "@/components/home/HomeScreen";
+
+const user = false;
+
 export default function Home() {
-  return <h1 className="font-bold text-3xl underline">Xin chào!</h1>;
+  return <>{user ? <HomeScreen /> : <AuthScreen />}</>;
 }
