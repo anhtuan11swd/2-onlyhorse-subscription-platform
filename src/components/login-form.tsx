@@ -79,8 +79,7 @@ export function LoginForm({
       }
 
       toast.success("Đăng nhập thành công");
-      router.push("/");
-      router.refresh();
+      router.push("/auth/callback");
     } catch {
       toast.error("Có lỗi xảy ra, vui lòng thử lại");
       setError("Có lỗi xảy ra, vui lòng thử lại");

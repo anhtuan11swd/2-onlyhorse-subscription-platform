@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "sonner";
+import QueryProvider from "@/components/providers/query-provider";
 import ThemeProvider from "@/components/providers/theme-provider";
 import "next-cloudinary/dist/cld-video-player.css";
 import "./globals.css";
@@ -25,7 +26,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
         <Toaster duration={2000} position="top-center" />
       </body>
     </html>
