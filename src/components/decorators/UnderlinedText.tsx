@@ -1,4 +1,3 @@
-import { LineSquiggle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface UnderlinedTextProps {
@@ -10,13 +9,5 @@ export default function UnderlinedText({
   children,
   className,
 }: UnderlinedTextProps) {
-  return (
-    <span className={cn("relative inline-block", className)}>
-      {children}
-      <LineSquiggle
-        className="absolute -bottom-1.5 left-0 w-full text-current"
-        strokeWidth={2}
-      />
-    </span>
-  );
+  return <span className={cn("font-semibold", className)}>{children}</span>;
 }
